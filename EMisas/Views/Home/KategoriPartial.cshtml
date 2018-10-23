@@ -1,0 +1,17 @@
+﻿@model IEnumerable<EMisas.Models.Kategori>
+@{
+    Layout = null;
+}
+
+<div class="panel-group category-products" id="accordian">
+    <!--category-productsr-->
+    <div class="panel panel-default">
+        @foreach (var item in Model)
+        {            <div class="panel-heading">
+            <h4 class="panel-title">
+                <a href="http://localhost:56204/Home/KategoriUrunler/@item.KategoriId"> @item.KategoriAdi</a>
+            </h4>
+        </div>
+        }
+    </div>
+</div>

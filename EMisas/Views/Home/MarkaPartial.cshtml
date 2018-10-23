@@ -1,0 +1,14 @@
+﻿@model IEnumerable<EMisas.Models.Marka>
+@{ 
+    Layout = null;
+}
+
+<div class="brands-name">
+    @foreach (var item in Model)
+    {
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="http://localhost:56204/Home/MarkaUrunler/@item.MarkaId">@item.MarkaAdi</a></li>
+        </ul>
+    }
+
+</div>

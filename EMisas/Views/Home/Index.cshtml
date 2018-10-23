@@ -1,0 +1,25 @@
+﻿@model IEnumerable<EMisas.Models.Urunler>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="features_items">
+    <!--features_items-->
+    <h2 class="title text-center">İndirimdeki Ürünler</h2>
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+
+            <div class="product-image-wrapper">
+                <div class="single-products">
+                    <div class="productinfo text-center">
+                        <a href="http://localhost:56204/Home/UrunDetay/@item.UrunId"><img src="@item.UrunResim" alt="@item.UrunAdi" /></a>                            
+                      
+                        <h2>@item.UrunSatisFiyat</h2>
+                        <p>@item.UrunAdi</p>                       
+                    </div>                 
+                </div>
+            </div>
+        </div>}
+</div>
+<!--features_items-->

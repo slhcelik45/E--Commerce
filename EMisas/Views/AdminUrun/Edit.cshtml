@@ -1,0 +1,97 @@
+﻿@model EMisas.Models.Urunler
+@{
+    ViewBag.Title = "Ürün Düzenle";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/ckeditor/ckeditor.js"></script>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        @using (Html.BeginForm("Edit", "AdminUrun", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <form role="form">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Ürün Ekle
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <i class="fa fa-newspaper-o"></i>  <a href="@Url.Action("Index", "AdminUrun")">Ürünler</a>
+                                </li>
+                                <li class="active">
+                                    <i class="fa fa-edit"></i> Ürün Düzenle
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess"> Kategori </label>
+                            @Html.DropDownListFor(x => x.KategoriId,
+                            new SelectList(ViewBag.Kategori, "KategoriId", "KategoriAdi"),
+                            ("Seçiniz"), new { @class = "form-control", id = "KategoriID" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess"> Marka </label>
+                            @Html.DropDownListFor(x => x.MarkaId,
+                            new SelectList(ViewBag.Marka, "MarkaID", "MarkaAdi"),
+                            ("Seçiniz"), new { @class = "form-control", id = "MarkaID" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Ürün Adı</label>
+                            @Html.TextBoxFor(x => x.UrunAdi, new { @class = "form-control", id = "urunAdi", placeholder = "Ürün Adı" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Açıklama</label>
+                            @Html.TextArea("UrunAciklama")
+                            <script type="text/javascript">
+                                var editor = CKEDITOR.instances['UrunAciklama'];
+                                if (editor) { editor.destroy(true); }
+                                CKEDITOR.replace('UrunAciklama', {
+                                    enterMode: CKEDITOR.ENTER_BR,
+                                });
+                            </script>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Alış Fiyatı</label>
+                            @Html.TextBoxFor(x => x.UrunAlışFiyat, new { @class = "form-control", id = "urunAlisFiyati", placeholder = "Alış Fiyatı" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Satış Fiyatı</label>
+                            @Html.TextBoxFor(x => x.UrunSatisFiyat, new { @class = "form-control", id = "urunSatisFiyati", placeholder = "Satış Fiyatı" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Son Kullanım Tarihi</label>
+                            @Html.TextBoxFor(x => x.UrunSonKullanımTarihi, new { @class = "form-control", @type = "date", id = "urunSKT", placeholder = "Son Kullanın Tarihi" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Stok</label>
+                            @Html.TextBoxFor(x => x.UrunStok, new { @class = "form-control", id = "urunStok", placeholder = "Stok" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Resim</label>
+                            <input type="file" name="urunResim" accept="image/*" class="form-control" />
+                            <img src="@Model.UrunResim" style="width:100px;height:50px" />
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(x => x.UrunIndirim, new { id = "urunIndirim" }) İndirim Uygula !
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <span class="fa fa-edit"></span> Düzenle
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+

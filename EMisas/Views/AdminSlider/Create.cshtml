@@ -1,0 +1,72 @@
+﻿@model EMisas.Models.Slider
+@{
+    ViewBag.Title = "Sldier Ekle";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/ckeditor/ckeditor.js"></script>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        @using (Html.BeginForm("Create", "AdminSlider", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <form role="form">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Slider Ekle
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <i class="fa fa-newspaper-o"></i>  <a href="@Url.Action("Index", "AdminSlider")">Slider</a>
+                                </li>
+                                <li class="active">
+                                    <i class="fa fa-edit"></i> Sldier Ekle
+                                </li>
+                            </ol>
+                        </div>                  
+                        
+                        <div class="form-group">
+                            <label for="inputSuccess">Başlık</label>
+                            @Html.TextBoxFor(x => x.Baslik, new { @class = "form-control", id = "sliderBaslik", placeholder = "Başlık", autofocus = true, required = true })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Açıklama</label>
+                            @Html.TextArea("Aciklama")
+                            <script type="text/javascript">
+                                var editor = CKEDITOR.instances['Aciklama'];
+                                if (editor) { editor.destroy(true); }
+                                CKEDITOR.replace('Aciklama', {
+                                    enterMode: CKEDITOR.ENTER_BR,
+                                });
+                            </script>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Resim</label>
+                            <input type="file" name="sliderResim" accept="image/*" class="form-control" required />
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(x => x.AktifMi, new { @checked="checked", id = "sliderAktif" }) Aktif Mİ ?
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSuccess">Ekleme Tarihi</label>
+                            @Html.TextBoxFor(x => x.EklemeTarihi, new { @class = "form-control", @type = "date", id = "urunSKT", placeholder = "Ekleme Tarihi" })
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            <span class="fa fa-save"></span> Kaydet
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
